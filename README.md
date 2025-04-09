@@ -11,7 +11,7 @@ First Sprint
 - El enfoque está orientado a escalabilidad y normalización.
 - La BD se modeló directamente en PostgreSQL y se validó con pruebas locales.
 
-posteriomente se agrega  el diagrama de bd.
+##### posteriomente se agrega  el diagrama de bd.
   
 ## 📅 Bitácora de Cambios Técnicos
 
