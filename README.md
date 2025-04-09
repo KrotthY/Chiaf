@@ -6,12 +6,11 @@ Infraestructura y configuraciones asociadas al entorno AWS para el proyecto Chia
 
 ### 2025-04-06 
 
-First Sprint
 - Se diseñaron las tablas iniciales del proyecto para usuarios, recetas, ingredientes y relaciones entre ellas.
 - El enfoque está orientado a escalabilidad y normalización.
 - La BD se modeló directamente en PostgreSQL y se validó con pruebas locales.
 
-##### posteriomente se agrega  el diagrama de bd.
+###### posteriomente se agrega  el diagrama de bd.
   
 ## 📅 Bitácora de Cambios Técnicos
 
@@ -22,13 +21,3 @@ First Sprint
 - 🧠 Se documentó la decisión en este README y se configuró correctamente la variable de entorno `PATH` para usar `pg_restore`.
 
 ---
-
-## 💾 Restauración de base de datos en RDS
-
-### Requisitos
-- Tener PostgreSQL instalado localmente (cliente CLI).
-- Acceso al archivo `.backup` en tu máquina.
-- Acceso a la instancia RDS (usuario, host, puerto).
-
-### Comando 
-pg_restore -h zes1.ds.amazs.cm -p 5432 -U Tapsin -d postgres --no-owner --verbose "Z:\Proyectos\chiaf\BackupChief.back"
