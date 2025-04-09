@@ -1,4 +1,3 @@
-
 # 🧠 Modelado de Base de Datos - Proyecto Chiaf
 
 Este módulo contiene los archivos relacionados al diseño lógico y físico de la base de datos.
