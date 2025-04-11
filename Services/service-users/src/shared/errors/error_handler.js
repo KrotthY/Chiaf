@@ -1,5 +1,8 @@
 
 export const errorHandler = (err,req,res,next)=>{
-  console.error('💥 Error validate:', err);
-  res.status(500).json({ message: 'Internal server error' });
+
+  const errorStatus = err.status || 500
+  const errorMsg = err.message || 'Internal server error'
+
+  res.status(errorStatus).json({success:false,status:errorStatus ,message: errorMsg});
 }
