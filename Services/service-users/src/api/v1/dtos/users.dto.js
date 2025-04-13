@@ -46,3 +46,17 @@ export const UpdateRecipeDto = joi.object({
   recipe_calories: joi.number().min(0).max(5000).required(),
   recipe_difficulty_level: joi.string().valid('easy', 'medium', 'hard').required()
 })
+
+// Foods 
+
+
+export const getFoodsCategoryDTO = (dataRaw)=>{
+  return dataRaw.map(foods => { 
+    return {
+      id_category:foods.id_food_subtype,
+      category_name:foods.food_category,
+      food_name: foods.name_food_type, 
+    }
+  })
+  
+}

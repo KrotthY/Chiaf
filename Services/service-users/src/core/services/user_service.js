@@ -1,4 +1,4 @@
-import { createNewUser, getAllRecipesDB, getDataUserByID, getRecipeDB, patchRecipeDB, validateEmail } from "../repositories/user_repository.js"
+import { createNewUser, getAllRecipesDB, getDataUserByID, getFoodsCategoryDB, getRecipeDB, patchRecipeDB, validateEmail } from "../repositories/user_repository.js"
 
 // users
 export const getUserByID = async (userIdParams) =>{
@@ -73,11 +73,25 @@ export const updateRecipeService = async (idRecipeCTR,bodyRecipeCTR)=>{
     throw errorUpdate
   }
   const recipeUpdateDB = await patchRecipeDB(idRecipeCTR,bodyRecipeCTR);
-  if(recipeUpdateDB !== undefined){
+  if(recipeUpdateDB === undefined){
     const errorUpdateDB = new Error('Recipe not updated')
     errorUpdateDB.status = 404
     throw errorUpdateDB
   }
 
   return recipeUpdateDB
+}
+
+
+// foods
+
+export const getFoodsService = async () =>{
+  const foodsDB = await getFoodsCategoryDB()
+  console.log(foodsDB)
+  if(!foodsDB){
+    const errorFoods = new Error('Food not found')
+    errorFoods.status = 404
+    throw errorFoods
+  }
+  return foodsDB
 }

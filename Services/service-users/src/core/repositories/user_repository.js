@@ -46,8 +46,21 @@ export const getRecipeDB = async (idRecipeSrc) =>{
 export const patchRecipeDB = async (idRecipeSRC,data) =>{
   const queryUpdate = `update recipes
   set name=$2,description=$3,estimated_time=$4,calories=$5,difficulty_level=$6 
-  where id_recipe = $1;`
+  where id_recipe = $1
+  RETURNING id_recipe;`
   const { rows } = await db.query(queryUpdate,[idRecipeSRC,data.recipe_name,data.recipe_description,data.recipe_estimated_time,data.recipe_calories,data.recipe_difficulty_level])
   return rows[0]
 }
 
+
+
+// Foods
+
+export const getFoodsCategoryDB = async() =>{
+  const querySelect = `select fst.id_food_subtype,fst.name as food_category, ft.name as name_food_type  
+  from  food_types ft 
+  join food_subtypes fst
+  on(ft.food_subtype_id = fst.id_food_subtype );`;
+  const  { rows } = await db.query(querySelect);
+  return rows;
+}

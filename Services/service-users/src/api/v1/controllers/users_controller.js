@@ -1,6 +1,7 @@
-import { getAllRecipesService, getRecipeService, getUserByID, postCreateUser, updateRecipeService } from "../../../core/services/user_service.js"
-import { recipesAllResponseDTO, userResponseDto } from "../dtos/users.dto.js"
+import { getAllRecipesService, getFoodsService, getRecipeService, getUserByID, postCreateUser, updateRecipeService } from "../../../core/services/user_service.js"
+import { getFoodsCategoryDTO, recipesAllResponseDTO, userResponseDto } from "../dtos/users.dto.js"
 
+// users
 export const getUsers = async (req,res,next)=>{
   try{
     const userId = parseInt(req.params.id,10)
@@ -21,7 +22,6 @@ export const postNewUser = async(req,res,next)=>{
 }
 
 // recipes
-
 export const getAllRecipes = async (req,res,next)=>{
   try {
     const recipesResponse = await getAllRecipesService()
@@ -43,10 +43,24 @@ export const getRecipeById = async (req,res,next) =>{
 
 export const patchRecipe = async(req,res,next)=>{
   try {
-    await updateRecipeService(req.params.id, req.body);
-    res.status(200).json({success:true, message:"recipe successfully updated"})
+    const recipeResponse = await updateRecipeService(req.params.id, req.body);
+    res.status(200).json({success:true, message:"recipe successfully updated",data:recipeResponse})
   } catch (error) {
     next(error)
   }
 }
+
+//Foods
+
+export const getAllFoods = async (req,res,next) =>{
+  try {
+    const foodsResponse = await getFoodsService();
+    console.log('foodsResponse',foodsResponse)
+    res.status(200).json({success:true,data:getFoodsCategoryDTO(foodsResponse)})
+  } catch (error) {
+    next(error)
+  }
+}
+
+
 
