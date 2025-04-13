@@ -1,5 +1,5 @@
-import { getAllRecipesService, getFoodsService, getRecipeService, getUserByID, postCreateUser, updateRecipeService } from "../../../core/services/user_service.js"
-import { getFoodsCategoryDTO, recipesAllResponseDTO, userResponseDto } from "../dtos/users.dto.js"
+import { getAllRecipesService, getFoodsService, getIngredientService, getRecipeService, getUserByID, postCreateUser, updateRecipeService } from "../../../core/services/user_service.js"
+import { getFoodsCategoryDTO, getRecipeIngredientsDTO, recipesAllResponseDTO, userResponseDto } from "../dtos/users.dto.js"
 
 // users
 export const getUsers = async (req,res,next)=>{
@@ -55,12 +55,22 @@ export const patchRecipe = async(req,res,next)=>{
 export const getAllFoods = async (req,res,next) =>{
   try {
     const foodsResponse = await getFoodsService();
-    console.log('foodsResponse',foodsResponse)
     res.status(200).json({success:true,data:getFoodsCategoryDTO(foodsResponse)})
   } catch (error) {
     next(error)
   }
 }
 
+
+//ingredients
+
+export const getIngredientRecipe = async (req,res,next) =>{
+  try {
+    const ingredientsResponse = await getIngredientService();
+    res.status(200).json({success:true, data:getRecipeIngredientsDTO(ingredientsResponse)})
+  } catch (error) {
+    next(error)
+  }
+}
 
 

@@ -22,21 +22,23 @@ export const createNewUserDto = joi.object({
 // recipes
 
 export const recipesAllResponseDTO = (dataRaw)=>{
-  return dataRaw.map(recipeData=>{
-    return {
-      id_recipe: recipeData.id_recipe,
-      recipe_name: recipeData.recipe_name,
-      recipe_description: recipeData.description,
-      recipe_score: recipeData.score ,
-      recipe_estimated_time: recipeData.estimated_time,
-      recipe_calories: recipeData.calories,
-      recipe_difficulty_level: recipeData.difficulty_level,
-      recipe_created_at: new Date(recipeData.created_at).toLocaleDateString(),
-      id_author: recipeData.id_author,
-      author_name:  recipeData.author_name,
-      author_score: recipeData.score_total_recipes
-    }
-  })
+  return dataRaw.map( recipeData => ({
+    id_recipe: recipeData.id_recipe,
+    recipe_name: recipeData.recipe_name,
+    recipe_description: recipeData.description,
+    recipe_score: recipeData.score ,
+    recipe_estimated_time: recipeData.estimated_time,
+    recipe_calories: recipeData.calories,
+    recipe_difficulty_level: recipeData.difficulty_level,
+    recipe_created_at: new Date(recipeData.created_at).toLocaleDateString(),
+    author:[
+      {
+        id_author: recipeData.id_author,
+        author_name:  recipeData.author_name,
+        author_score: recipeData.score_total_recipes
+      }
+    ]
+  })) 
 }
 
 export const UpdateRecipeDto = joi.object({
@@ -51,13 +53,55 @@ export const UpdateRecipeDto = joi.object({
 
 
 export const getFoodsCategoryDTO = (dataRaw)=>{
-  return dataRaw.map(foods => { 
-    return {
-      id_category:foods.id_food_subtype,
-      category_name:foods.food_category,
-      food_name: foods.name_food_type,
-      img_url: foods.url
+
+  return dataRaw.reduce((acc,item)=>{
+
+    if(!acc[item.id_food_subtype]){
+
+      acc[item.id_food_subtype] = {
+        id_category:item.id_food_subtype,
+        category_name:item.food_category,
+        category_content: []
+      }
     }
-  })
+
+    acc[item.id_food_subtype].category_content.push({
+      food_name: item.name_food_type,
+        img_url: item.url
+    })
+
+    return acc
+  },{})
+}
+
+// ingredients 
+export const getRecipeIngredientsDTO = (dataRaw) => {
+  if (dataRaw.length === 0) return null;
+  const  {
+    recipe_name,
+    description: recipe_description,
+    estimated_time: recipe_estimated_time,
+    score:recipe_score,
+    calories:recipe_calories,
+    difficulty_level: recipe_difficulty_level,
+  } = dataRaw[0]
+
+  const ingredients = dataRaw.map(ingredient =>({
+    ingredient_name:ingredient.name,
+    ingredient_quantity:ingredient.quantity,
+    ingredient_abbreviation:ingredient.abbreviation,
+  }))
+
+  return {
+    recipe_name,
+    recipe_description,
+    recipe_estimated_time,
+    recipe_score,
+    recipe_calories,
+    recipe_difficulty_level,
+    ingredients
+  }
+
   
+
 }

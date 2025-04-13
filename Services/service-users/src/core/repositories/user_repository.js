@@ -64,3 +64,16 @@ export const getFoodsCategoryDB = async() =>{
   const  { rows } = await db.query(querySelect);
   return rows;
 }
+
+
+// Ingredient
+export const getIngredientsDB = async () =>{
+  const querySelect  = `select ft.name ,i.quantity ,r.name  as  recipe_name, r.description, r.estimated_time, r.score, r.calories, r.difficulty_level , um.abbreviation
+  from ingredients i  
+  join recipes r on(i.recipe_id = r.id_recipe)
+  join unit_measurements um on(i.unit_mst_id = um.id_unit_mst) 
+  join food_types ft on(ft.id_food_type = i.food_type_id)
+  where r.id_recipe = 1;;`
+  const { rows } = await db.query(querySelect)
+  return rows
+}

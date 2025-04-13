@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllFoods, getAllRecipes, getRecipeById, getUsers,patchRecipe,postNewUser } from '../controllers/users_controller.js'
+import { getAllFoods, getAllRecipes, getIngredientRecipe, getRecipeById, getUsers,patchRecipe,postNewUser } from '../controllers/users_controller.js'
 import { validateDto } from '../../../shared/middlewares/validate.dto.js';
 import { createNewUserDto, UpdateRecipeDto } from '../dtos/users.dto.js';
 const router = Router();
@@ -19,6 +19,7 @@ router.patch('/recipes/:id',validateDto(UpdateRecipeDto),patchRecipe)
 
 router.get('/foods',getAllFoods)
 
-
+//ingredients
+router.get('/ingredients',getIngredientRecipe)
 
 export default router
