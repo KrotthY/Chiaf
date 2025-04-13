@@ -57,10 +57,10 @@ export const patchRecipeDB = async (idRecipeSRC,data) =>{
 // Foods
 
 export const getFoodsCategoryDB = async() =>{
-  const querySelect = `select fst.id_food_subtype,fst.name as food_category, ft.name as name_food_type  
+  const querySelect = `select fst.id_food_subtype,fst.name as food_category, ft.name as name_food_type, img.url  
   from  food_types ft 
   join food_subtypes fst
-  on(ft.food_subtype_id = fst.id_food_subtype );`;
+  on(ft.food_subtype_id = fst.id_food_subtype ) join images img on(fst.id_food_subtype = img.food_subtype);`;
   const  { rows } = await db.query(querySelect);
   return rows;
 }

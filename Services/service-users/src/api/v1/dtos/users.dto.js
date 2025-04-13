@@ -55,7 +55,8 @@ export const getFoodsCategoryDTO = (dataRaw)=>{
     return {
       id_category:foods.id_food_subtype,
       category_name:foods.food_category,
-      food_name: foods.name_food_type, 
+      food_name: foods.name_food_type,
+      img_url: foods.url
     }
   })
   
