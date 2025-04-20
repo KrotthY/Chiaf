@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+.content-page {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.nav-link {
+  @apply w-full h-full px-4 py-2 text-lg text-gray-900 font-semibold rounded hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200;
+}
+.btn-login {
+  @apply px-4 py-2 bg-gray-900 font-medium text-white rounded hover:bg-gray-900/80;
+}
+
+.btn-sing-up {
+  @apply px-4 py-2 bg-green-900 font-medium text-white rounded hover:bg-green-900/80;
+}
